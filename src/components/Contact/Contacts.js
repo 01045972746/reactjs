@@ -3,6 +3,7 @@ import update from 'react-addons-update'
 import ContactCreator from './ContactCreator'
 import ContactInfo from './ContactInfo'
 import ContactRemover from "./ContactRemover";
+import ContactEditor from "./ContactEditor";
 
 class Contacts extends React.Component {
 
@@ -15,7 +16,11 @@ class Contacts extends React.Component {
                 {name: "Charlie", phone: "010-0000-0003"},
                 {name: "David", phone: "010-0000-0004"}
             ],
-            selectedKey: -1
+            selectedKey: -1,
+            selected: {
+                name: "",
+                phone: ""
+            }
         };
     }
 
@@ -23,13 +28,18 @@ class Contacts extends React.Component {
         if(key==this.state.selectedKey) {
             console.log("Key Select Cancelled");
             this.setState({
-                selectedKey: -1
+                selectedKey: -1,
+                selected: {
+                    name: "",
+                    phone: ""
+                }
             });
             return;
         }
 
         this.setState({
-            selectedKey: key
+            selectedKey: key,
+            selected: this.state.contactData[key]
         });
         console.log("Key : "+key+" is selected!");
     }
@@ -67,6 +77,25 @@ class Contacts extends React.Component {
         });
     }
 
+    _editContact(name, phone) {
+        this.setState({
+            contactData: update(
+                this.state.contactData,
+                {
+                    [this.state.selectedKey]: {
+                        name: { $set: name },
+                        phone: { $set: phone }
+                    }
+                }
+            ),
+            selected: {
+                name: name,
+                phone: phone
+            }
+        });
+
+    }
+
 
     render() {
         return (
@@ -85,6 +114,9 @@ class Contacts extends React.Component {
                 </ul>
                 <ContactCreator onInsert={this._insertContact.bind(this)}/>
                 <ContactRemover onRemove={this._removeContact.bind(this)}/>
+                <ContactEditor onEdit={this._editContact.bind(this)}
+                                isSelected={(this.state.selectedKey != -1)}
+                                contact={this.state.selected}/>
             </div>
         );
     }
