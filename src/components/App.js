@@ -1,4 +1,7 @@
 import React from 'react';
+import update from 'react-addons-update'
+import ContactCreator from './Contact/ContactCreator'
+
 
 class App extends React.Component {
     render(){
@@ -23,6 +26,15 @@ class Contacts extends React.Component {
         }
     }
 
+    _insertContact(name, phone){
+        let newState = update(this.state, {
+            contactData: {
+                $push: [{"name": name, "phone": phone}]
+            }
+        });
+        this.setState(newState);
+    }
+
 
     render() {
         return (
@@ -36,6 +48,7 @@ class Contacts extends React.Component {
                             />);
                     })}
                 </ul>
+                <ContactCreator onInsert={this._insertContact.bind(this)}/>
             </div>
         );
     }
