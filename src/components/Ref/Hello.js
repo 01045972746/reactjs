@@ -6,14 +6,15 @@ class Hello extends React.Component {
     render() {
         return (
             <div>
-                <TextBox ref={ref => this.textBox = ref}/>
+                <input ref={ref => this.input = ref} />
                 <button onClick={this.handleClick.bind(this)}>Click Me</button>
             </div>
         );
     }
 
     handleClick() {
-        this.textBox.input.value = "I used ref";
+        this.input.value = "";
+        this.input.focus();
     }
 
 
