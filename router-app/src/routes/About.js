@@ -1,9 +1,9 @@
 import React from 'react';
 
-const About = () => {
+const About = ({match}) => {
     return (
         <div>
-            소개 페이지
+            {match.params.username} 소개 페이지
         </div>
     );
 };

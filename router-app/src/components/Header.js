@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
     return (
         <div className="header">
-            <Link to="/" className="item">Home</Link>
-            <Link to="/about" className="item">소개</Link>
+            <NavLink exact to="/" className="item" activeClassName="active">Home</NavLink>
+            <NavLink to="/about/testusername" className="item" activeClassName="active">소개</NavLink>
+            <NavLink to="/posts" className="item" activeClassName="active">포스트</NavLink>
+            <NavLink to="/login" className="item" activeClassName="active">로그인</NavLink>
+            <NavLink to="/mypage" className="item" activeClassName="active">마이페이지</NavLink>
         </div>
     );
 };
