@@ -10,7 +10,7 @@ class App extends Component {
       <div className={cx('box', {
         blue: isBlue
       })}>
-      
+        <div className={cx('box-inside')}/>
       </div>
     );
   }
