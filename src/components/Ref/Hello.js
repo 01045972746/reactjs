@@ -1,18 +1,19 @@
 import React from 'react'
+import TextBox from './TextBox'
 
 
 class Hello extends React.Component {
     render() {
         return (
             <div>
-                <input ref={ref => this.input = ref}>
-                </input>
+                <TextBox ref={ref => this.textBox = ref}/>
+                <button onClick={this.handleClick.bind(this)}>Click Me</button>
             </div>
         );
     }
 
-    componentDidMount() {
-        this.input.value = "I used ref to do this";
+    handleClick() {
+        this.textBox.input.value = "I used ref";
     }
 
 
