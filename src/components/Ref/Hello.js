@@ -5,14 +5,14 @@ class Hello extends React.Component {
     render() {
         return (
             <div>
-                <input ref="myInput">
+                <input ref={ref => this.input = ref}>
                 </input>
             </div>
         );
     }
 
     componentDidMount() {
-        this.refs.myInput.value = "Hi, I used ref to do this";
+        this.input.value = "I used ref to do this";
     }
 
 
