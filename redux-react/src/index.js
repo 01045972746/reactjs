@@ -1,94 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import PropTypes from 'prop-types';
+import { Provider  } from 'react-redux';
+import App from './components/App';
+import counterApp from './reducers';
 
-/*
- * Action
- */
-const INCREMENT = "INCREMENT";
-
-function increase(diff) {
-    return {
-        type: INCREMENT,
-        addBy: diff
-    };
-}
-
-
-/*
- * Reducer
- */
-const initialState = {
-    value: 0
-};
-
-const counterReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case INCREMENT:
-            return Object.assign({}, state, {
-                value: state.value + action.addBy
-            });
-        default:
-            return state;
-    }
-}
-
-/*
- * Store
- */
-const store = createStore(counterReducer);
-
-
-/**
- * App.js
- */
-
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this);
-    }
-
-    render(){
-
-        let centerStyle = {
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            WebkitUserSelect: 'none',
-            MozUserSelect: 'none',
-            MsUserSelect:'none',
-            userSelect: 'none',
-            cursor: 'pointer'
-        };
-
-        return (
-                <div 
-                    onClick={this.onClick}
-                    style={this.centerStyle}
-                >
-                    <h1>{this.props.store.getState().value}</h1>
-                </div>
-        );
-    }
-
-    onClick() {
-        this.props.store.dispatch(increase(1));
-    }
-}
+const store = createStore(counterApp);
+const appElement = document.getElementById('app');
 
 
 
-const render = () => {
-    
-        const appElement = document.getElementById('app');
-        ReactDOM.render(
-            <App store={store}/>,
-            appElement
-        );
-    };
-    
-store.subscribe(render);
-render();
+ReactDOM.render(
+    <Provider store = {store}>
+        <App />
+    </Provider>,
+    appElement
+);
