@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement, multiply } from '../actions';
+import { increment, decrement, multiply, divide } from '../actions';
 
 class Buttons extends React.Component {
     render() {
@@ -18,6 +18,10 @@ class Buttons extends React.Component {
                         onClick={ this.props.onMultiple }>
                         *
                 </button>
+                <button type="button"
+                        onClick={ this.props.onDivide }>
+                        /
+                </button>
             </div>
         )
     }
@@ -27,7 +31,8 @@ let mapDispatchToProps = (dispatch) => {
     return {
         onIncrement: () => dispatch(increment()),
         onDecrement: () => dispatch(decrement()),
-        onMultiple: () => dispatch(multiply())
+        onMultiple: () => dispatch(multiply()),
+        onDivide: () => dispatch(divide())
     }
 }
 
