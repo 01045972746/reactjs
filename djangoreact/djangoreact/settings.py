@@ -18,15 +18,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets')
-)
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles',
-    }
-}
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ')+i27-1ob+k%tgg7ewx(_otk%pjk-3lv_bdee+j_o#bro-@lct'
@@ -46,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webpack_loader',
+    'post',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
