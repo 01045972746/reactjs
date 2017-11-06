@@ -11,7 +11,7 @@ Action
  */
 const INCREMENT = "INCREMENT";
 
-function increase(diff) {
+export function increase(diff) {
     return {
         type: INCREMENT,
         addBy: diff
